@@ -15,6 +15,10 @@ EXPORTS
    hs_database_size
    hs_deserialize_database
    hs_deserialize_database_at
+   hs_direct_flush_stream
+   hs_direct_free_stream
+   hs_direct_reset_and_copy_stream
+   hs_direct_reset_stream
    hs_expand_stream
    hs_expression_ext_info
    hs_expression_info

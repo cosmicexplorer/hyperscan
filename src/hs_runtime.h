@@ -232,6 +232,18 @@ hs_error_t HS_CDECL hs_scan_stream(hs_stream_t *id, const char *data,
 hs_error_t HS_CDECL hs_close_stream(hs_stream_t *id, hs_scratch_t *scratch,
                                     match_event_handler onEvent, void *ctxt);
 
+hs_error_t HS_CDECL hs_direct_flush_stream(hs_stream_t *id,
+                                           hs_scratch_t *scratch,
+                                           match_event_handler onEvent,
+                                           void *ctxt);
+
+hs_error_t HS_CDECL hs_direct_free_stream(hs_stream_t *id);
+
+hs_error_t HS_CDECL hs_direct_reset_stream(hs_stream_t *id);
+
+hs_error_t HS_CDECL hs_direct_reset_and_copy_stream(hs_stream_t *to_id,
+                                                    const hs_stream_t *from_id);
+
 /**
  * Reset a stream to an initial state.
  *
