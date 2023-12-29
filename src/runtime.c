@@ -1349,3 +1349,19 @@ hs_error_t HS_CDECL hs_reset_and_expand_stream(hs_stream_t *to_stream,
         return HS_INVALID;
     }
 }
+
+HS_PUBLIC_API
+hs_error_t HS_CDECL hs_direct_expand_into(hs_stream_t *to_stream,
+                                          const char *buf, size_t buf_size) {
+    if (unlikely(!to_stream || !buf)) {
+        return HS_INVALID;
+    }
+
+    const struct RoseEngine *rose = to_stream->rose;
+
+    if (expand_stream(to_stream, rose, buf, buf_size)) {
+        return HS_SUCCESS;
+    } else {
+        return HS_INVALID;
+    }
+}

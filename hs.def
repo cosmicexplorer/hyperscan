@@ -19,6 +19,7 @@ EXPORTS
    hs_direct_free_stream
    hs_direct_reset_and_copy_stream
    hs_direct_reset_stream
+   hs_direct_expand_into
    hs_expand_stream
    hs_expression_ext_info
    hs_expression_info
