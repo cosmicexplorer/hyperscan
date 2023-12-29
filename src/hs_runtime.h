@@ -453,6 +453,9 @@ hs_error_t HS_CDECL hs_reset_and_expand_stream(hs_stream_t *to_stream,
                                                match_event_handler onEvent,
                                                void *context);
 
+hs_error_t HS_CDECL hs_direct_expand_into(hs_stream_t *to_stream,
+                                          const char *buf, size_t buf_size);
+
 /**
  * The block (non-streaming) regular expression scanner.
  *

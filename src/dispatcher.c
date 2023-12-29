@@ -154,6 +154,9 @@ CREATE_DISPATCH(hs_error_t, hs_direct_reset_stream, hs_stream_t *id);
 CREATE_DISPATCH(hs_error_t, hs_direct_reset_and_copy_stream, hs_stream_t *to_id,
                 const hs_stream_t *from_id);
 
+CREATE_DISPATCH(hs_error_t, hs_direct_expand_into, hs_stream_t *to_stream,
+                const char *buf, size_t buf_size);
+
 CREATE_DISPATCH(hs_error_t, hs_scan_vector, const hs_database_t *db,
                 const char *const *data, const unsigned int *length,
                 unsigned int count, unsigned int flags, hs_scratch_t *scratch,
