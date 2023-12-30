@@ -190,6 +190,11 @@ hs_error_t HS_CDECL hs_scan_stream(hs_stream_t *id, const char *data,
                                    hs_scratch_t *scratch,
                                    match_event_handler onEvent, void *ctxt);
 
+hs_error_t HS_CDECL hs_scan_vectored_stream(
+    hs_stream_t *id, const char *const *data, const unsigned int *length,
+    unsigned int count, unsigned int flags, hs_scratch_t *scratch,
+    match_event_handler onEvent, void *ctxt);
+
 /**
  * Close a stream.
  *
