@@ -26,6 +26,7 @@ EXPORTS
    hs_reset_stream
    hs_scan
    hs_scan_stream
+   hs_scan_vectored_stream
    hs_scan_vector
    hs_scratch_size
    hs_serialize_database

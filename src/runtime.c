@@ -996,6 +996,41 @@ hs_error_t HS_CDECL hs_scan_stream(hs_stream_t *id, const char *data,
 }
 
 HS_PUBLIC_API
+hs_error_t HS_CDECL hs_scan_vectored_stream(
+    hs_stream_t *id, const char *const *data, const unsigned int *length,
+    unsigned int count, unsigned int flags, hs_scratch_t *scratch,
+    match_event_handler onEvent, void *context) {
+    if (unlikely(!id || !scratch || !data ||
+                 !validScratch(id->rose, scratch))) {
+        return HS_INVALID;
+    }
+
+    if (unlikely(markScratchInUse(scratch))) {
+        return HS_SCRATCH_IN_USE;
+    }
+
+    /* Mimicking the approach of hs_scan_vector() to scan in each line of data
+     * using hs_scan_stream_internal(). */
+    for (u32 i = 0; i < count; i++) {
+        DEBUG_PRINTF("block %u/%u offset=%llu len=%u\n", i, count, id->offset,
+                     length[i]);
+#ifdef DEBUG
+        dumpData(data[i], length[i]);
+#endif
+
+        hs_error_t ret = hs_scan_stream_internal(id, data[i], length[i], flags,
+                                                 scratch, onEvent, context);
+        if (ret != HS_SUCCESS) {
+            unmarkScratchInUse(scratch);
+            return ret;
+        }
+    }
+
+    unmarkScratchInUse(scratch);
+    return HS_SUCCESS;
+}
+
+HS_PUBLIC_API
 hs_error_t HS_CDECL hs_direct_flush_stream(hs_stream_t *id,
                                            hs_scratch_t *scratch,
                                            match_event_handler onEvent,
