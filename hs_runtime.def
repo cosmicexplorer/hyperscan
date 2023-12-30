@@ -18,6 +18,7 @@ EXPORTS
    hs_direct_reset_stream
    hs_direct_expand_into
    hs_expand_stream
+   hs_expand_stream_at
    hs_free_database
    hs_free_scratch
    hs_open_stream

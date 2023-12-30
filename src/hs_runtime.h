@@ -413,6 +413,10 @@ hs_error_t HS_CDECL hs_expand_stream(const hs_database_t *db,
                                      hs_stream_t **stream, const char *buf,
                                      size_t buf_size);
 
+hs_error_t HS_CDECL hs_expand_stream_at(const hs_database_t *db,
+                                        const char *buf, size_t buf_size,
+                                        hs_stream_t *to);
+
 /**
  * Decompresses a compressed representation created by @ref hs_compress_stream()
  * on top of the 'to' stream. The 'to' stream will first be reset (reporting
