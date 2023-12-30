@@ -1352,6 +1352,35 @@ hs_error_t HS_CDECL hs_expand_stream(const hs_database_t *db,
 }
 
 HS_PUBLIC_API
+hs_error_t HS_CDECL hs_expand_stream_at(const hs_database_t *db,
+                                        const char *buf, size_t buf_size,
+                                        hs_stream_t *to) {
+    if (unlikely(!to || !buf)) {
+        return HS_INVALID;
+    }
+
+    hs_error_t err = validDatabase(db);
+    if (unlikely(err != HS_SUCCESS)) {
+        return err;
+    }
+
+    const struct RoseEngine *rose = hs_get_bytecode(db);
+    if (unlikely(!ISALIGNED_16(rose))) {
+        return HS_INVALID;
+    }
+
+    if (unlikely(rose->mode != HS_MODE_STREAM)) {
+        return HS_DB_MODE_ERROR;
+    }
+
+    if (!expand_stream(to, rose, buf, buf_size)) {
+        return HS_INVALID;
+    }
+
+    return HS_SUCCESS;
+}
+
+HS_PUBLIC_API
 hs_error_t HS_CDECL hs_reset_and_expand_stream(hs_stream_t *to_stream,
                                                const char *buf, size_t buf_size,
                                                hs_scratch_t *scratch,
